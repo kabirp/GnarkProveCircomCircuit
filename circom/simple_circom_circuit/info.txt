@@ -1,0 +1,16 @@
+circom/simple_circom_circuit $ circom simple.circom --r1cs --wasm --sym
+
+template instances: 1
+non-linear constraints: 4
+linear constraints: 2
+public inputs: 0
+private inputs: 2
+public outputs: 1
+wires: 9
+labels: 9
+Written successfully: ./simple.r1cs
+Written successfully: ./simple.sym
+Written successfully: ./simple_js/simple.wasm
+Everything went okay
+
+Computes (x+1)^3 + y^4 + 8

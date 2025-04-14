@@ -1,0 +1,12 @@
+template instances: 1
+non-linear constraints: 1
+linear constraints: 0
+public inputs: 0
+private inputs: 2
+public outputs: 1
+wires: 4
+labels: 4
+Written successfully: ./multiplier.r1cs
+Written successfully: ./multiplier.sym
+Written successfully: ./multiplier_js/multiplier.wasm
+Everything went okay

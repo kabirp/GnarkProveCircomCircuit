@@ -1,0 +1,57 @@
+# This gitignore file contents were copied from gnark's gitignore file
+
+**/.DS_Store
+**/*.zip	**/*.zip
+# Binaries for programs and plugins	# Binaries for programs and plugins
+*.exe	*.exe
+*.exe~	*.exe~
+*.dll	*.dll
+*.so	*.so
+*.dylib	*.dylib
+# Test binary, build with `go test -c`	# Test binary, build with `go test -c`
+*.test	*.test
+# Output of the go coverage tool, specifically when used with LiteIDE	# Output of the go coverage tool, specifically when used with LiteIDE
+*.out	*.out
+old*.txt	old*.txt
+new*.txt	new*.txt
+*.prof	*.prof
+*.pprof	*.pprof
+tasks.txt	tasks.txt
+**/ref.txt	**/ref.txt
+**/*.pk	**/*.pk
+**/*.vk	**/*.vk
+**/*.proof	**/*.proof
+**/*.input	**/*.input
+**/*.r1cs	**/*.r1cs
+input.json	input.json
+*.log	*.log
+**/*.csv	**/*.csv
+# Files used as backups when refactoring	# Files used as backups when refactoring
+*.backup	*.backup
+# generated files during integratrion tests	# generated files during integratrion tests
+integratrion_test/**	integratrion_test/**
+# binary	# binary
+gnark	gnark
+playground	playground
+examples/benchmark/benchmark	examples/benchmark/benchmark
+examples/**/*.html	examples/**/*.html
+# gnarkd example circuits	# gnarkd example circuits
+gnarkd/circuits/**	gnarkd/circuits/**
+.vscode	.vscode
+# compiled sage -> python code	# compiled sage -> python code
+*.sage.py	*.sage.py
+# Jetbrains stuff	# Jetbrains stuff
+.idea/	.idea/
+# go workspace	# go workspace
+go.work	go.work
+go.work.sum	go.work.sum
+
+
+examples/gbotrel/**	examples/gbotrel/**
+
+**/circom/**/*.js
+**/circom/**/*.wasm
+**/circom/**/*.sym
+**/circom/**/*.r1cs
+**/circom/**/*.json
+**/circom/**/*.wtns
