@@ -2,6 +2,9 @@
 // REQUIRES builder struct in github.com/consensys/gnark/frontend/cs/r1cs to have:
 // 1. a field of type constraint.R1CS named "cs"
 // 2. a field of type constraint.BlueprintID named "genericGate"
+// 3. an internal kvstore (key-value store) that implements the following methods:
+//   - SetKeyValue(key, value any)
+//   - GetKeyValue(key any) any
 package main
 
 import (
@@ -20,7 +23,11 @@ type DirtyBuilder struct {
 }
 
 func NewDirtyBuilder(field *big.Int, config frontend.CompileConfig) (frontend.Builder, error) {
-	return r1cs.NewBuilder(field, config)
+	wrappedBuilder, err := r1cs.NewBuilder(field, config)
+	if err != nil {
+		return nil, err
+	}
+	return &DirtyBuilder{wrappedBuilder: wrappedBuilder}, nil
 }
 
 // This is an unsafe hack because the gnark library does not export the
@@ -71,6 +78,28 @@ func (dirtyBuilder *DirtyBuilder) PrintR1CS() {
 	for _, r1c := range constraints {
 		log.Println(r1c.String(builder_cs))
 	}
+}
+
+// More hacks for the internal kvstore inside the wrappedBuilder object.
+
+// Ensure DirtyBuilder implements the kvstore methods by forwarding calls.
+func (db *DirtyBuilder) SetKeyValue(key, value any) {
+	// We know that the underlying builder implements:
+	//   SetKeyValue(key, value any)
+	type storeInterface interface {
+		SetKeyValue(key, value any)
+	}
+	// Assert the underlying builder implements storeInterface and call it.
+	si := db.wrappedBuilder.(storeInterface)
+	si.SetKeyValue(key, value)
+}
+
+func (db *DirtyBuilder) GetKeyValue(key any) any {
+	type storeInterface interface {
+		GetKeyValue(key any) any
+	}
+	si := db.wrappedBuilder.(storeInterface)
+	return si.GetKeyValue(key)
 }
 
 // This code is copy pasted from github.com/consensys/gnark/frontend/cs/r1cs/builder.go
